@@ -12,61 +12,7 @@ $t1 = microtime(true);
 $tableBranchAndBound = new    TableBranchAndBound;
 $root = new    Node($tableBranchAndBound->table);
 $t2 = microtime(true);
-$googleRows = new    RowsGoogleCharts($root);/*
-function memoryCount(Node $root)
-{
-				$mem = 0;
-				if ($root)
-				{
-								$mem += count($root->branchnBound->table)*count($root->branchnBound->table);
-								foreach($root->childrens as $child)
-								{
-												$mem += memoryCount($child) + 1;
-								}
-				}
-				return $mem;
-}
-$mem = memoryCount($root);
-$mem = [];
-$times = [];
-for($i = 0; $i < 600; $i++)
-{
-				unset($root);
-				unset($tableBranchAndBound);
-				$t = microtime(true);
-				$tableBranchAndBound	=	new	TableBranchAndBound;
-				$root	=	new	Node($tableBranchAndBound->table);
-				$times[$i] = microtime(true) - $t;
-				$mem[] = memoryCount($root);
-}
-for($i = 0; $i < 100;$i++)
-{
-
-unset($times[$i]);
-}
-
-sort($times);
-sort($mem);
-echo min($times),"\n", max($times),"\n";
-echo min($mem),"\n", max($mem);*/
-/*for ($j = 3; $j <= 44; $j++)
-{
-    for ($i = 0; $i < 100; $i++)
-    {
-        unset($root);
-        unset($tableBranchAndBound);
-        $_POST['amount'] = $j;
-        $t = microtime(true);
-        $tableBranchAndBound = new    TableBranchAndBound;
-        $root = new    Node($tableBranchAndBound->table);
-        $times[$j][$i] = microtime(true) - $t;
-    }
-}
-    foreach($times as &$time)
-    {
-        $time = array_sum($time) / count($time);
-        //$time = min($time);
-    }*/
+$googleRows = new    RowsGoogleCharts($root);
 ?><!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -134,64 +80,7 @@ echo min($mem),"\n", max($mem);*/
             var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
             google.visualization.events.addListener(chart, 'ready', myReadyHandler);
             chart.draw(data, {allowHtml: true});
-            var data = google.visualization.arrayToDataTable([
-             ['Номер', 'Время'],
-            <?php
-                                            /*foreach($times as $key => $time)
-                                            {
-                                                            //if($key%3 == 0)
-                                                            echo "[".($key).", $time],";
-                                            }*/
-            ?>
-             ]);
 
-             var options = {
-             title: 'Минимальное затраченное времяв зависимости от размерности',
-                 curveType: 'function',
-             hAxis: {title: 'Размерность', titleTextStyle: {color: 'red'}, minValue: 0}
-             };
-
-             var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
-
-             chart.draw(data, options);
-             /*
-             var data = google.visualization.arrayToDataTable([
-             ['Номер', 'Кол-во элементов'],
-            <?php
-                                            /*foreach($mem as $key => $time)
-                                            {
-                                                            echo "['$key', $time],";
-                                            }*/
-            ?>
-             ]);
-
-             var options = {
-             title: 'Память',
-             hAxis: {title: 'Память', titleTextStyle: {color: 'red'}}
-             };
-
-             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
-
-             chart.draw(data, options);*/
-            /*
-             var data = google.visualization.arrayToDataTable([
-             ['Номер', 'Кол-во элементов'],
-            <?php
-                                            /*foreach($mem as $key => $time)
-                                            {
-                                                            echo "['$key', $time],";
-                                            }*/
-            ?>
-             ]);
-
-             var options = {
-             title: 'Память',
-             hAxis: {title: 'Память', titleTextStyle: {color: 'red'}}
-             };
-
-             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
-
-             chart.draw(data, options);*/
         }
     </script>
 </head>
@@ -214,7 +103,7 @@ echo min($mem),"\n", max($mem);*/
             <form method="POST">
                 <p>
                     <button name="pr1" class="btn btn-default">Пример1</button>
-                    <a href="/2014_aisd_lektsia5-1.ppt">Лекция</a>
+                    <a href="/2014_aisd_lektsia5-1.ppt">Источник</a>
                 </p>
                 <p>
                     <button name="pr2" class="btn btn-default">Пример2</button>
@@ -291,9 +180,5 @@ echo min($mem),"\n", max($mem);*/
     </div>
 
 </div>
-
-<script type="text/javascript">
-
-</script>
 </body>
 </html>
