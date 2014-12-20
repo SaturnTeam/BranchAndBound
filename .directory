@@ -1,5 +1,9 @@
 [Dolphin]
+<<<<<<< HEAD
 Timestamp=2014,12,20,19,55,11
+=======
+Timestamp=2014,12,20,19,57,24
+>>>>>>> 482dc91b397d317a9a4bf3abbc3339ce3da9f489
 Version=3
 
 [Settings]
