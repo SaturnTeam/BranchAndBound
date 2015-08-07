@@ -62,7 +62,8 @@ class    TableBranchAndBound
         {
             foreach ($row as $columnName => $value)
             {
-                $this->table[$rowName][$columnName] = abs(intval($value));
+                $this->table[$rowName][$columnName] = abs(intval($value)) + mt_rand(0,100)/100;
+                mt_srand(mt_rand());
             }
         }
         foreach ($this->table as $rowName => $row)

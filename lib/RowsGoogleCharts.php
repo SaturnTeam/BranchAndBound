@@ -33,6 +33,7 @@ class    RowsGoogleCharts
         }
         foreach ($leaves as $leaf)
         {
+
             $this->data[] = self::makeRow(
                 $leaf->id,
                 $leaf->callId,

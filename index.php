@@ -13,6 +13,7 @@ $tableBranchAndBound = new    TableBranchAndBound;
 $root = new    Node($tableBranchAndBound->table);
 $t2 = microtime(true);
 $googleRows = new    RowsGoogleCharts($root);
+
 ?><!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -80,6 +81,8 @@ $googleRows = new    RowsGoogleCharts($root);
             var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
             google.visualization.events.addListener(chart, 'ready', myReadyHandler);
             chart.draw(data, {allowHtml: true});
+
+
 
         }
     </script>
@@ -158,7 +161,7 @@ $googleRows = new    RowsGoogleCharts($root);
     <div class="row">
         <div class="col-xs-12">
             <div id="chart_div"></div>
-            <div id="chart_div2"></div>
+            <div id="chart_di"></div>
             <div id="chart_div3"></div>
         </div>
     </div>
@@ -166,6 +169,7 @@ $googleRows = new    RowsGoogleCharts($root);
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
+        <h4>(Для подбробного решения выберите нужный этап на дереве)</h4>
             <h2><?= Node::$answer; ?></h2><?= 'Время:' . ($t2 - $t1) ?>
         </div>
     </div>

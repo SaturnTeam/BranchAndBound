@@ -69,7 +69,10 @@ class    Node
         else
         {
             $this->branchnBound = $table;
-            $this->addMyselfToMins();
+            if($this->branchnBound->solvable)
+            {
+                $this->addMyselfToMins();
+            }
             $this->prev = $prev;
         }
     }

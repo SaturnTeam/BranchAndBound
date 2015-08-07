@@ -26,4 +26,8 @@ class    Coords
         $this->row = $row;
         $this->column = $column;
     }
+    function __toString()
+    {
+        return "($this->row:$this->column)";
+    }
 }

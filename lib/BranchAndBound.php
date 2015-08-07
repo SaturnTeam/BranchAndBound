@@ -62,6 +62,11 @@ class    BranchAndBound
      */
     public static $messages;
     /**
+     * Решаема ли матрица или нет
+     * @var boolean
+     */
+    public $solvable = true;
+    /**
      * Получившиеся звенья на этапах ( необходима для предотвращения циклов)
      * @var array
      */
@@ -244,6 +249,18 @@ class    BranchAndBound
     function    zeroDegreePosition()
     {
         list($max, $sumsArr) = $this->zeroDegreeMax();
+        if (!$this->addToRamfication($sumsArr))
+        {
+            throw    new    Exception("", 1);
+        }
+        self::addMess([], "Максимальная степень 0 находятся на позициях $this->ramfication = $max");
+    }
+    /**
+     * Добавляем координаты для разделения
+     * @return boolean
+     */
+    private function addToRamfication($sumsArr)
+    {
         foreach ($sumsArr as $i => $row)
         {
             foreach ($row as $j => $column)
@@ -251,14 +268,11 @@ class    BranchAndBound
                 if ($column == $max)
                 {
                     $this->ramfication->add($i, $j);
+                    return true;
                 }
             }
         }
-        if (count($this->ramfication->coords) == 0)
-        {
-            throw    new    Exception("", 1);
-        }
-        self::addMess([], "Максимальная степень 0 находятся на позициях $this->ramfication = $max");
+        return false;
     }
 
     /**
@@ -319,6 +333,11 @@ class    BranchAndBound
             return $this->minBorder != INF;
         }
         self::addMess($this->table, 'Начинаем разделение');
+        foreach ($this->ramfication->coords as $key => $coord)
+        {
+
+        self::addMess([], $coord);
+        }
         $return = [];
         foreach ($this->ramfication->coords as $key => $coord)
         {
@@ -326,12 +345,12 @@ class    BranchAndBound
             $branchnBound1 = $this->withoutCoordsHandle($coord);
             $branchnBound2 = $this->withCoordsHandle($coord);
             $str = "Граница у несодержащего ребро ($coord->row,$coord->column):";
-            $str .= $branchnBound1 ? $branchnBound1->minBorder : "INF";
+            $str .= $branchnBound1->solvable ? $branchnBound1->minBorder : "INF";
             $str .= " у содержащего";
-            $str .= $branchnBound2 ? $branchnBound2->minBorder : "INF";
+            $str .= $branchnBound2->solvable ? $branchnBound2->minBorder : "INF";
             self::addMess([], $str);
-            $branchnBound1 && $return[] = $branchnBound1;
-            $branchnBound2 && $return[] = $branchnBound2;
+            $return[] = $branchnBound1;
+            $return[] = $branchnBound2;
         }
         return $return;
     }
@@ -355,7 +374,7 @@ class    BranchAndBound
             $branchnBound1->doOperations();
         } catch (Exception    $e)
         {
-            return false;
+            $branchnBound1->solvable = false;
         }
         return $branchnBound1;
     }
@@ -384,7 +403,7 @@ class    BranchAndBound
             $branchnBound2->doOperations();
         } catch (Exception    $e)
         {
-            return false;
+            $branchnBound2->solvable = false;
         }
         return $branchnBound2;
     }
