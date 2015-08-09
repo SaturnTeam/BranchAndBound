@@ -252,7 +252,7 @@ class    BranchAndBound
         {
             throw    new    Exception("", 1);
         }
-        self::addMess([], "Максимальная степень 0 находятся на позициях $this->ramfication = $max");
+        self::addMess([], "Максимальная степень 0 находятся на позициях $this->ramfication");
     }
     /**
      * Добавляем координаты для разделения
