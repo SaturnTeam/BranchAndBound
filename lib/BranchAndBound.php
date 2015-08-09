@@ -248,8 +248,7 @@ class    BranchAndBound
      */
     function    zeroDegreePosition()
     {
-        list($max, $sumsArr) = $this->zeroDegreeMax();
-        if (!$this->addToRamfication($sumsArr))
+        if (!$this->addToRamfication($this->zeroDegreeMax()))
         {
             throw    new    Exception("", 1);
         }
@@ -259,8 +258,9 @@ class    BranchAndBound
      * Добавляем координаты для разделения
      * @return boolean
      */
-    private function addToRamfication($sumsArr)
+    private function addToRamfication($zeroDegreeMax)
     {
+        list($max, $sumsArr) = $zeroDegreeMax;
         foreach ($sumsArr as $i => $row)
         {
             foreach ($row as $j => $column)
