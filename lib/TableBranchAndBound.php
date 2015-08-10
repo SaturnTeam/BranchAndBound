@@ -38,11 +38,11 @@ class    TableBranchAndBound
         if (isset($_POST['amount']))
         {
             $amount = (int)$_POST['amount'];
-            $rows = ($amount > 2 && $amount < 15) ? $amount : 3;
+            $rows = ($amount > 2 && $amount < 20) ? $amount : 3;
         }
         else
         {
-            $rows = rand(3, 7);
+            $rows = rand(3, $max);
         }
         for ($i = 1; $i <= $rows; $i++)
         {
@@ -62,8 +62,7 @@ class    TableBranchAndBound
         {
             foreach ($row as $columnName => $value)
             {
-                $this->table[$rowName][$columnName] = abs(intval($value)) + mt_rand(0,100)/100;
-                mt_srand(mt_rand());
+                $this->table[$rowName][$columnName] = abs(intval($value));
             }
         }
         foreach ($this->table as $rowName => $row)
